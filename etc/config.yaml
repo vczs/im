@@ -1,0 +1,10 @@
+port: 8080
+redis:
+  host: 127.0.0.1
+  port: 6379
+mongo:
+  host: 0.0.0.0
+  port: 27017
+  name: admin
+  password: admin123
+  database: im
