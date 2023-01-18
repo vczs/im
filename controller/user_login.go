@@ -24,6 +24,7 @@ func UserLogin(c *gin.Context) {
 	if err != nil {
 		help.VczsLog("param analyse error", err)
 		Response(c, define.PARAMETER_ANAIYSIS_FAILED, "", nil)
+		return
 	}
 	if req.Account == "" || req.Password == "" {
 		Response(c, define.ACCOUNT_OR_PASSWORD_EMPTY, "", nil)

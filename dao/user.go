@@ -23,23 +23,25 @@ func (User) CollectionName() string {
 	return "user"
 }
 
-// 通过账号、密码获取用户
-func GetUserByAccountPassword(account, password string) (*User, error) {
-	user := new(User)
-	err := Mongo.Collection(User{}.CollectionName()).
-		FindOne(context.Background(), bson.D{{"account", account}, {"password", password}}).
-		Decode(user)
-	if err != nil {
-		return nil, err
-	}
-	return user, nil
-}
-
 // 通过uid获取用户
-func GetUserByUid(uid string) (*User, error) {
-	user := new(User)
-	err := Mongo.Collection(User{}.CollectionName()).
+func GetUserByUid(uid string) (user *User, err error) {
+	user = new(User)
+	err = Mongo.Collection(User{}.CollectionName()).
 		FindOne(context.Background(), bson.D{{"uid", uid}}).
 		Decode(user)
-	return user, err
+	return
+}
+
+// 通过account、password获取用户
+func GetUserByAccountPassword(account, password string) (user *User, err error) {
+	user = new(User)
+	err = Mongo.Collection(User{}.CollectionName()).
+		FindOne(context.Background(), bson.D{{"account", account}, {"password", password}}).
+		Decode(user)
+	return
+}
+
+// 通过email查询用户数量
+func GetUserCountByEmail(email string) (num int64, err error) {
+	return Mongo.Collection(User{}.CollectionName()).CountDocuments(context.Background(), bson.D{{"email", email}})
 }

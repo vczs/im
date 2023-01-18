@@ -12,7 +12,9 @@ import (
 func Router() {
 	r := gin.Default()
 	{
-		// 发送验证码
+		// 发送邮箱验证码
+		r.POST("/send/email/code", controller.SendEnailCode)
+		// 用户登录
 		r.POST("/login", controller.UserLogin)
 	}
 
