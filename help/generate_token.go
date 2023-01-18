@@ -8,15 +8,15 @@ import (
 )
 
 type UserClaim struct {
-	Uid   string
-	Email string
+	Uid  string
+	Name string
 	jwt.RegisteredClaims
 }
 
-func GenerateToken(uid, email string, second int) (string, error) {
+func GenerateToken(uid, name string, second int) (string, error) {
 	uc := UserClaim{
 		Uid:              uid,
-		Email:            email,
+		Name:             name,
 		RegisteredClaims: jwt.RegisteredClaims{ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Second * time.Duration(second)))},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, uc)

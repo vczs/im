@@ -2,12 +2,12 @@ package main
 
 import (
 	"im/config"
-	"im/model"
+	"im/dao"
 	"im/router"
 )
 
 func main() {
 	config.Init()
-	model.Init()
+	dao.Init()
 	router.Router()
 }
