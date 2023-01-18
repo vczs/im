@@ -15,12 +15,9 @@ import (
 var Redis *redis.Client
 var Mongo *mongo.Database
 
-func Init(config *config.Config) error {
-	redis := InitRedis(config.Redis.Host, config.Redis.Port)
-	mongo, err := InitMongo(config.Mongo.Host, config.Mongo.Name, config.Mongo.Password, config.Mongo.Database, config.Mongo.Port)
-	Redis = redis
-	Mongo = mongo
-	return err
+func Init() {
+	Redis = InitRedis(config.Config.Redis.Host, config.Config.Redis.Port)
+	Mongo = InitMongo(config.Config.Mongo.Host, config.Config.Mongo.Name, config.Config.Mongo.Password, config.Config.Mongo.Database, config.Config.Mongo.Port)
 }
 
 func InitRedis(host string, port int) *redis.Client {
@@ -29,7 +26,7 @@ func InitRedis(host string, port int) *redis.Client {
 	})
 }
 
-func InitMongo(host, name, password, db string, port int) (*mongo.Database, error) {
+func InitMongo(host, name, password, db string, port int) *mongo.Database {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	client, err := mongo.Connect(ctx, options.Client().SetAuth(options.Credential{
@@ -38,7 +35,7 @@ func InitMongo(host, name, password, db string, port int) (*mongo.Database, erro
 	}).ApplyURI(fmt.Sprintf("mongodb://%s:%d", host, port)))
 	if err != nil {
 		help.VczsLog("connection mongo error", err)
-		return nil, err
+		return nil
 	}
-	return client.Database(db), nil
+	return client.Database(db)
 }

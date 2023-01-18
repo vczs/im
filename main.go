@@ -7,13 +7,7 @@ import (
 )
 
 func main() {
-	c, err := config.AnalyConfig()
-	if err != nil {
-		return
-	}
-	err = model.Init(c)
-	if err != nil {
-		return
-	}
-	router.Router(c.Port)
+	config.Init()
+	model.Init()
+	router.Router()
 }

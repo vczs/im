@@ -7,7 +7,9 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-type Config struct {
+var Config *config
+
+type config struct {
 	Port  int
 	Redis struct {
 		Host string
@@ -22,17 +24,17 @@ type Config struct {
 	}
 }
 
-func AnalyConfig() (*Config, error) {
-	config := &Config{}
+func Init() {
+	config := &config{}
 	data, err := ioutil.ReadFile("config/config.yaml")
 	if err != nil {
 		help.VczsLog("read ymal file failed", err)
-		return nil, err
+		return
 	}
 	err = yaml.Unmarshal(data, config)
 	if err != nil {
 		help.VczsLog("ymal data unmarshal failed", err)
-		return nil, err
+		return
 	}
-	return config, nil
+	Config = config
 }
