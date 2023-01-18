@@ -1,4 +1,4 @@
-package config
+package define
 
 const (
 	OK = 0 // success

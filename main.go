@@ -2,17 +2,18 @@ package main
 
 import (
 	"im/config"
-	"im/help"
 	"im/model"
 	"im/router"
 )
 
 func main() {
-	conf, err := config.InitConfig()
+	c, err := config.AnalyConfig()
 	if err != nil {
-		help.VczsLog("init config error", err)
 		return
 	}
-	model.Init(conf)
-	router.Router(conf.Port)
+	err = model.Init(c)
+	if err != nil {
+		return
+	}
+	router.Router(c.Port)
 }

@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"im/config"
+	"im/define"
 	"im/help"
 	"im/model"
 
@@ -22,27 +22,27 @@ func Login(c *gin.Context) {
 	req := new(LoginRequest)
 	err := c.ShouldBind(req)
 	if err != nil {
-		Response(c, config.PARAMETER_ANAIYSIS_FAILED, "", nil)
+		Response(c, define.PARAMETER_ANAIYSIS_FAILED, "", nil)
 	}
 	if req.Account == "" || req.Password == "" {
-		Response(c, config.ACCOUNT_OR_PASSWORD_EMPTY, "", nil)
+		Response(c, define.ACCOUNT_OR_PASSWORD_EMPTY, "", nil)
 		return
 	}
 	user, err := model.GetUserBasicByAccountPassword(req.Account, help.GetMd5(req.Password))
 	if err != nil {
-		Response(c, config.ACCOUNT_OR_PASSWORD_ERROR, "", nil)
+		Response(c, define.ACCOUNT_OR_PASSWORD_ERROR, "", nil)
 		return
 	}
-	token, err := help.GenerateToken(user.Uid, user.Email, config.TokenExpire)
+	token, err := help.GenerateToken(user.Uid, user.Email, define.TokenExpire)
 	if err != nil {
 		Response(c, -1, err.Error(), nil)
 		return
 	}
-	refreshToken, err := help.GenerateToken(user.Uid, user.Email, config.RefreshTokenExpire)
+	refreshToken, err := help.GenerateToken(user.Uid, user.Email, define.RefreshTokenExpire)
 	if err != nil {
 		Response(c, -1, err.Error(), nil)
 		return
 	}
 	res := LoginResponse{Token: token, RefreshToken: refreshToken}
-	Response(c, config.OK, "登陆成功!", res)
+	Response(c, define.OK, "登陆成功!", res)
 }

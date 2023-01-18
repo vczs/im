@@ -2,7 +2,7 @@ package help
 
 import (
 	"crypto/tls"
-	"im/config"
+	"im/define"
 	"net/smtp"
 
 	"github.com/jordan-wright/email"
@@ -14,7 +14,7 @@ func SendEmailCode(mail, code string) error {
 	e.To = []string{mail}
 	e.Subject = "vczs平台验证码"
 	e.HTML = []byte("你的验证码为：<h1>" + code + "</h1>")
-	err := e.SendWithTLS("smtp.163.com:465", smtp.PlainAuth("", "vczsvs@163.com", config.MainPwd, "smtp.163.com"), &tls.Config{InsecureSkipVerify: true, ServerName: "smtp.163.com"})
+	err := e.SendWithTLS("smtp.163.com:465", smtp.PlainAuth("", "vczsvs@163.com", define.MainPwd, "smtp.163.com"), &tls.Config{InsecureSkipVerify: true, ServerName: "smtp.163.com"})
 	if err != nil {
 		return err
 	}

@@ -1,6 +1,7 @@
 package config
 
 import (
+	"im/help"
 	"io/ioutil"
 
 	"gopkg.in/yaml.v3"
@@ -21,15 +22,17 @@ type Config struct {
 	}
 }
 
-func InitConfig() (Config, error) {
-	config := Config{}
-	data, err := ioutil.ReadFile("etc/config.yaml")
+func AnalyConfig() (*Config, error) {
+	config := &Config{}
+	data, err := ioutil.ReadFile("config/config.yaml")
 	if err != nil {
-		return config, err
+		help.VczsLog("read ymal file failed", err)
+		return nil, err
 	}
-	err = yaml.Unmarshal(data, &config)
+	err = yaml.Unmarshal(data, config)
 	if err != nil {
-		return config, err
+		help.VczsLog("ymal data unmarshal failed", err)
+		return nil, err
 	}
 	return config, nil
 }
