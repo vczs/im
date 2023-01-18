@@ -6,6 +6,7 @@ const (
 	TOKEN_INVALID             = 101 // token无效
 	PARAMETER_ANAIYSIS_FAILED = 102 // 参数解析失败
 	REQUEST_OFTEN             = 103 // 请求频繁
+	ACCESS_DENIED             = 104 // 拒绝访问
 
 	EMAIL_EMPTY               = 10001 // 邮箱为空
 	EMAIL_HAS_REGISTERED      = 10002 // 邮箱已被注册
@@ -19,6 +20,7 @@ var message = map[int]string{
 	TOKEN_INVALID:             "token无效!",
 	PARAMETER_ANAIYSIS_FAILED: "参数解析失败!",
 	REQUEST_OFTEN:             "请求频繁!",
+	ACCESS_DENIED:             "拒绝访问!",
 
 	EMAIL_EMPTY:               "邮箱为空!",
 	EMAIL_HAS_REGISTERED:      "邮箱已被注册!",

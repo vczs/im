@@ -6,7 +6,9 @@ require (
 	github.com/gin-gonic/gin v1.8.2
 	github.com/go-redis/redis/v9 v9.0.0-rc.2
 	github.com/golang-jwt/jwt/v4 v4.4.3
+	github.com/gorilla/websocket v1.5.0
 	github.com/jordan-wright/email v4.0.1-0.20210109023952-943e75fe5223+incompatible
+	github.com/satori/go.uuid v1.2.0
 	go.mongodb.org/mongo-driver v1.11.1
 	gopkg.in/yaml.v3 v3.0.1
 )

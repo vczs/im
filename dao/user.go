@@ -26,18 +26,14 @@ func (User) CollectionName() string {
 // 通过uid获取用户
 func GetUserByUid(uid string) (user *User, err error) {
 	user = new(User)
-	err = Mongo.Collection(User{}.CollectionName()).
-		FindOne(context.Background(), bson.D{{"uid", uid}}).
-		Decode(user)
+	err = Mongo.Collection(User{}.CollectionName()).FindOne(context.Background(), bson.D{{"uid", uid}}).Decode(user)
 	return
 }
 
 // 通过account、password获取用户
 func GetUserByAccountPassword(account, password string) (user *User, err error) {
 	user = new(User)
-	err = Mongo.Collection(User{}.CollectionName()).
-		FindOne(context.Background(), bson.D{{"account", account}, {"password", password}}).
-		Decode(user)
+	err = Mongo.Collection(User{}.CollectionName()).FindOne(context.Background(), bson.D{{"account", account}, {"password", password}}).Decode(user)
 	return
 }
 

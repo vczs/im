@@ -23,6 +23,8 @@ func Router() {
 	{
 		// 用户信息
 		auth.POST("/info", controller.UserInfo)
+		// 通讯
+		auth.GET("/comm", controller.Comm)
 	}
 
 	r.Run(fmt.Sprintf(":%d", config.Config.Port))
