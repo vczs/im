@@ -1,6 +1,11 @@
 package dao
 
-import "context"
+import (
+	"context"
+	"time"
+
+	"go.mongodb.org/mongo-driver/bson"
+)
 
 type Room struct {
 	Rid      string `json:"rid"`
@@ -19,5 +24,10 @@ func (Room) CollectionName() string {
 
 func InsertRoom(room *Room) error {
 	_, err := Mongo.Collection(Room{}.CollectionName()).InsertOne(context.Background(), room)
+	return err
+}
+
+func DeleteRoomByRid(rid string) error {
+	_, err := Mongo.Collection(new(Room).CollectionName()).UpdateMany(context.Background(), bson.M{"rid": rid}, bson.M{"$set": bson.M{"status": -1, "ut": time.Now().Unix()}})
 	return err
 }

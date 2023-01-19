@@ -33,6 +33,8 @@ func Router() {
 		auth.GET("/comm", controller.Comm)
 		// 聊天记录
 		auth.POST("/record", controller.Record)
+		// 删除好友
+		auth.DELETE("/delete/contacts", controller.DeleteContacts)
 	}
 
 	r.Run(fmt.Sprintf(":%d", config.Config.Port))

@@ -2,6 +2,8 @@ package dao
 
 import (
 	"context"
+	"im/define"
+	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
 )
@@ -46,25 +48,34 @@ func FindUserRoomByRid(rid string) (urs []*UserRoom, err error) {
 }
 
 // 判断是否为好友
-func IsFriend(u1, u2 string) (isFriend bool, err error) {
+func IsFriend(u1, u2 string) (isFriend bool, rid string) {
 	isFriend = false
-	cur, err := Mongo.Collection(new(UserRoom).CollectionName()).Find(context.Background(), bson.M{"uid": u1, "type": 1})
+	ur := new(UserRoom)
+	cur, err := Mongo.Collection(new(UserRoom).CollectionName()).Find(context.Background(), bson.M{"uid": u1, "type": define.UserRoomTypeAlone, "status": 1})
 	if err != nil {
 		return
 	}
 	rs := make([]string, 0)
 	for cur.Next(context.Background()) {
 		ur := new(UserRoom)
-		cur.Decode(ur)
+		err = cur.Decode(ur)
+		if err != nil {
+			return
+		}
 		rs = append(rs, ur.Rid)
 	}
-	num, err := Mongo.Collection(new(UserRoom).CollectionName()).
-		CountDocuments(context.Background(), bson.M{"uid": u2, "type": 1, "rid": bson.M{"$in": rs}})
+	err = Mongo.Collection(new(UserRoom).CollectionName()).FindOne(context.Background(), bson.M{"uid": u2, "type": define.UserRoomTypeAlone, "status": 1, "rid": bson.M{"$in": rs}}).Decode(ur)
 	if err != nil {
 		return
 	}
-	if num > 0 {
+	if ur.Rid != "" {
+		rid = ur.Rid
 		isFriend = true
 	}
 	return
+}
+
+func DeleteUserRoomByRid(rid string) error {
+	_, err := Mongo.Collection(new(UserRoom).CollectionName()).UpdateMany(context.Background(), bson.M{"rid": rid}, bson.M{"$set": bson.M{"status": -1, "ut": time.Now().Unix()}})
+	return err
 }

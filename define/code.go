@@ -17,8 +17,10 @@ const (
 	EMAIL_CODE_WRONG          = 10013 // 验证码不正确
 	USER_NOT_EXIST            = 10014 // 用户不存在
 
-	NOT_ADD_YOURSELF = 20001 // 不能添加自己
-	ALREADY_FRIEND   = 20002 // 你与该用户已是好友
+	NOT_ADD_YOURSELF    = 20001 // 不能添加自己
+	ALREADY_FRIEND      = 20002 // 你与该用户已是好友
+	NOT_DELETE_YOURSELF = 20003 // 不能删除自己
+	NOT_FRIEND          = 20004 // 非好友无需删除
 )
 
 var message = map[int]string{
@@ -38,8 +40,10 @@ var message = map[int]string{
 	EMAIL_CODE_WRONG:          "验证码不正确!",
 	USER_NOT_EXIST:            "用户不存在!",
 
-	NOT_ADD_YOURSELF: "不能添加自己!",
-	ALREADY_FRIEND:   "你与该用户已是好友!",
+	NOT_ADD_YOURSELF:    "不能添加自己!",
+	ALREADY_FRIEND:      "你与该用户已是好友!",
+	NOT_DELETE_YOURSELF: "不能删除自己!",
+	NOT_FRIEND:          "非好友无需删除!",
 }
 
 // GetMessage 获取message
