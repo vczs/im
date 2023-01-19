@@ -18,7 +18,7 @@ type LoginResponse struct {
 	RefreshToken string `json:"refreshToken"`
 }
 
-func UserLogin(c *gin.Context) {
+func Login(c *gin.Context) {
 	req := new(LoginRequest)
 	err := c.ShouldBind(req)
 	if err != nil {

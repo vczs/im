@@ -14,8 +14,10 @@ func Router() {
 	{
 		// 发送邮箱验证码
 		r.POST("/send/email/code", controller.SendEnailCode)
+		// 用户注册
+		r.POST("/register", controller.Register)
 		// 用户登录
-		r.POST("/login", controller.UserLogin)
+		r.POST("/login", controller.Login)
 	}
 
 	// 用户认证
