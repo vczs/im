@@ -25,8 +25,10 @@ func Router() {
 	{
 		// 用户信息
 		auth.POST("/info", controller.UserInfo)
-		// 查询指定用户的个人信息
+		// 搜索用户
 		auth.POST("/search", controller.Search)
+		// 添加用户
+		auth.POST("/add/contacts", controller.AddContacts)
 		// 通讯
 		auth.GET("/comm", controller.Comm)
 		// 聊天记录

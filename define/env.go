@@ -12,3 +12,6 @@ var TokenExpire = 9600         // token过期时间
 var RefreshTokenExpire = 96000 // refreshToken过期时间
 
 var DefaultLimit int64 = 10 // 分页查询默认每页条数
+
+var UserRoomTypeAlone = 1 // 私聊
+var UserRoomTypeGroup = 2 // 群聊

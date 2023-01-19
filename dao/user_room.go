@@ -19,6 +19,11 @@ func (UserRoom) CollectionName() string {
 	return "user_room"
 }
 
+func InsertManyUserRoom(urs []interface{}) error {
+	_, err := Mongo.Collection(UserRoom{}.CollectionName()).InsertMany(context.Background(), urs)
+	return err
+}
+
 func GetUserRoomCountByUidRid(uid, rid string) (num int64, err error) {
 	return Mongo.Collection(UserRoom{}.CollectionName()).CountDocuments(context.Background(), bson.M{"uid": uid, "rid": rid})
 }

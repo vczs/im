@@ -18,6 +18,7 @@ const (
 	USER_NOT_EXIST            = 10014 // 用户不存在
 
 	NOT_ADD_YOURSELF = 20001 // 不能添加自己
+	ALREADY_FRIEND   = 20002 // 你与该用户已是好友
 )
 
 var message = map[int]string{
@@ -38,6 +39,7 @@ var message = map[int]string{
 	USER_NOT_EXIST:            "用户不存在!",
 
 	NOT_ADD_YOURSELF: "不能添加自己!",
+	ALREADY_FRIEND:   "你与该用户已是好友!",
 }
 
 // GetMessage 获取message
