@@ -1,5 +1,5 @@
 # im
-> mongoDB + gin + websocket 实现的一个即时通讯系统
+> mongoDB + gin + websocket 实现的一个即时通信系统
 
 ## 扩展
 gin框架
