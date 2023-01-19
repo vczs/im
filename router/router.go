@@ -25,6 +25,8 @@ func Router() {
 		auth.POST("/info", controller.UserInfo)
 		// 通讯
 		auth.GET("/comm", controller.Comm)
+		// 聊天记录
+		auth.POST("/record", controller.Record)
 	}
 
 	r.Run(fmt.Sprintf(":%d", config.Config.Port))

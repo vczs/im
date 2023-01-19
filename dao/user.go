@@ -26,18 +26,18 @@ func (User) CollectionName() string {
 // 通过uid获取用户
 func GetUserByUid(uid string) (user *User, err error) {
 	user = new(User)
-	err = Mongo.Collection(User{}.CollectionName()).FindOne(context.Background(), bson.D{{"uid", uid}}).Decode(user)
+	err = Mongo.Collection(User{}.CollectionName()).FindOne(context.Background(), bson.M{"uid": uid}).Decode(user)
 	return
 }
 
 // 通过account、password获取用户
 func GetUserByAccountPassword(account, password string) (user *User, err error) {
 	user = new(User)
-	err = Mongo.Collection(User{}.CollectionName()).FindOne(context.Background(), bson.D{{"account", account}, {"password", password}}).Decode(user)
+	err = Mongo.Collection(User{}.CollectionName()).FindOne(context.Background(), bson.M{"account": account, "password": password}).Decode(user)
 	return
 }
 
 // 通过email查询用户数量
 func GetUserCountByEmail(email string) (num int64, err error) {
-	return Mongo.Collection(User{}.CollectionName()).CountDocuments(context.Background(), bson.D{{"email", email}})
+	return Mongo.Collection(User{}.CollectionName()).CountDocuments(context.Background(), bson.M{"email": email})
 }

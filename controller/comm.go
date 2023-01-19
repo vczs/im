@@ -30,6 +30,7 @@ func Comm(c *gin.Context) {
 	// 获取用户信息
 	uc, has := c.Get("user")
 	if !has {
+		help.VczsLog("user not exit!", nil)
 		return
 	}
 	user := uc.(*help.UserClaim)
@@ -45,9 +46,9 @@ func Comm(c *gin.Context) {
 			return
 		}
 		// 判断用户是否属于目标房间
-		num, err := dao.GetUserRoomByUidRid(user.Uid, ms.Rid)
+		num, err := dao.GetUserRoomCountByUidRid(user.Uid, ms.Rid)
 		if err != nil {
-			help.VczsLog("get user room by uid and rid error", err)
+			help.VczsLog("get user room count by uid and rid error", err)
 			return
 		}
 		if num < 1 {

@@ -12,6 +12,8 @@ const (
 	EMAIL_HAS_REGISTERED      = 10002 // 邮箱已被注册
 	ACCOUNT_OR_PASSWORD_EMPTY = 10010 // 账号或密码为空
 	ACCOUNT_OR_PASSWORD_ERROR = 10011 // 账号或密码错误
+
+	RID_EMPTY = 20001 // 房间id为空
 )
 
 var message = map[int]string{
@@ -26,6 +28,8 @@ var message = map[int]string{
 	EMAIL_HAS_REGISTERED:      "邮箱已被注册!",
 	ACCOUNT_OR_PASSWORD_EMPTY: "账号或密码为空!",
 	ACCOUNT_OR_PASSWORD_ERROR: "账号或密码错误!",
+
+	RID_EMPTY: "房间id为空!",
 }
 
 // GetMessage 获取message

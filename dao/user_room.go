@@ -19,12 +19,12 @@ func (UserRoom) CollectionName() string {
 	return "user_room"
 }
 
-func GetUserRoomByUidRid(uid, rid string) (num int64, err error) {
-	return Mongo.Collection(UserRoom{}.CollectionName()).CountDocuments(context.Background(), bson.D{{"uid", uid}, {"rid", rid}})
+func GetUserRoomCountByUidRid(uid, rid string) (num int64, err error) {
+	return Mongo.Collection(UserRoom{}.CollectionName()).CountDocuments(context.Background(), bson.M{"uid": uid, "rid": rid})
 }
 
 func FindUserRoomByRid(rid string) (urs []*UserRoom, err error) {
-	cursor, err := Mongo.Collection(UserRoom{}.CollectionName()).Find(context.Background(), bson.D{{"rid", rid}})
+	cursor, err := Mongo.Collection(UserRoom{}.CollectionName()).Find(context.Background(), bson.M{"rid": rid})
 	if err != nil {
 		return nil, err
 	}
