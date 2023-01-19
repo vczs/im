@@ -15,8 +15,9 @@ const (
 	ACCOUNT_OR_PASSWORD_ERROR = 10011 // 账号或密码错误
 	ACCOUNT_EXIST             = 10012 // 账号已存在
 	EMAIL_CODE_WRONG          = 10013 // 验证码不正确
+	USER_NOT_EXIST            = 10014 // 用户不存在
 
-	RID_EMPTY = 20001 // 房间id为空
+	NOT_ADD_YOURSELF = 20001 // 不能添加自己
 )
 
 var message = map[int]string{
@@ -34,8 +35,9 @@ var message = map[int]string{
 	ACCOUNT_OR_PASSWORD_ERROR: "账号或密码错误!",
 	ACCOUNT_EXIST:             "账号已存在!",
 	EMAIL_CODE_WRONG:          "验证码不正确!",
+	USER_NOT_EXIST:            "用户不存在!",
 
-	RID_EMPTY: "房间id为空!",
+	NOT_ADD_YOURSELF: "不能添加自己!",
 }
 
 // GetMessage 获取message

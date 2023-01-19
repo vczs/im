@@ -47,6 +47,13 @@ func GetUserCountByAccount(account string) (num int64, err error) {
 	return Mongo.Collection(User{}.CollectionName()).CountDocuments(context.Background(), bson.M{"account": account})
 }
 
+// 通过account查询用户
+func GetUserByAccount(account string) (*User, error) {
+	user := new(User)
+	err := Mongo.Collection(User{}.CollectionName()).FindOne(context.Background(), bson.M{"account": account}).Decode(user)
+	return user, err
+}
+
 // 添加用户
 func InsertUser(user *User) error {
 	_, err := Mongo.Collection(new(User).CollectionName()).InsertOne(context.Background(), user)

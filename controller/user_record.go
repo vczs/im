@@ -26,7 +26,7 @@ func Record(c *gin.Context) {
 	// 参数校验
 	rid, page, limit := req.Rid, req.Page, req.Limit
 	if rid == "" {
-		Response(c, define.RID_EMPTY, "", nil)
+		Response(c, 20002, "rid is empty!", nil)
 		return
 	}
 	// 获取用户信息

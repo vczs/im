@@ -39,3 +39,27 @@ func FindUserRoomByRid(rid string) (urs []*UserRoom, err error) {
 	}
 	return urs, nil
 }
+
+// 判断是否为好友
+func IsFriend(u1, u2 string) (isFriend bool, err error) {
+	isFriend = false
+	cur, err := Mongo.Collection(new(UserRoom).CollectionName()).Find(context.Background(), bson.M{"uid": u1, "type": 1})
+	if err != nil {
+		return
+	}
+	rs := make([]string, 0)
+	for cur.Next(context.Background()) {
+		ur := new(UserRoom)
+		cur.Decode(ur)
+		rs = append(rs, ur.Rid)
+	}
+	num, err := Mongo.Collection(new(UserRoom).CollectionName()).
+		CountDocuments(context.Background(), bson.M{"uid": u2, "type": 1, "rid": bson.M{"$in": rs}})
+	if err != nil {
+		return
+	}
+	if num > 0 {
+		isFriend = true
+	}
+	return
+}
